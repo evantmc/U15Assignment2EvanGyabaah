@@ -227,3 +227,16 @@ footer {
   height: 28px;
   object-fit: contain;
 }
+/* Form validation error styling */
+.error-text {
+  color: red;
+  font-size: 12px;
+  font-weight: bold;
+  margin-top: 4px;
+  display: none;
+}
+
+.form-group input.invalid,
+.form-group textarea.invalid {
+  border: 2px solid red;
+}
