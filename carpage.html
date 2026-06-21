@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive Space — Cars</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: black;
+    }
+
+    /* ── Header ── */
+    header {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      height: 70px;
+      border: 2px solid black;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-left: 16px;
+    }
+
+    .header-title {
+      display: flex;
+      align-items: center;
+      font-size: 42px;
+      font-weight: bold;
+    }
+
+    .nav-arrows {
+      display: flex;
+      gap: 6px;
+    }
+
+    .nav-arrows button {
+      width: 32px;
+      height: 32px;
+      background-color: white;
+      border: 2px solid black;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav-arrows button:hover {
+      background-color: #ffff00;
+    }
+    .logo {
+      background-color: #8c8c8c;
+      border-left: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Nav ── */
+    nav {
+      height: 70px;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #f5f5f5;
+    }
+
+    nav a {
+      color: black;
+      text-decoration: none;
+      padding: 6px 16px;
+      border: 2px solid transparent;
+    }
+
+    nav a:hover {
+      border: 2px solid black;
+      background-color: #ffff00;
+    }
+
+    nav a.active {
+      background-color: #ffff00;
+      border: 2px solid black;
+    }
+
+    /* ── Page heading ── */
+    .page-heading {
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 40px;
+      background-color: white;
+    }
+
+    .page-heading h1 {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .page-heading p {
+      font-size: 15px;
+      color: #555;
+      margin: 0;
+    }
+
+    /* ── Cars grid ── */
+    .cars-section {
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      padding: 40px;
+      background-color: white;
+    }
+
+    .cars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    /* ── Car card ── */
+    .car-card {
+      border: 2px solid black;
+      background-color: white;
+      transition: box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .car-card:hover {
+      box-shadow: 6px 6px 0px black;
+      transform: translate(-2px, -2px);
+    }
+
+    /* image area */
+    .card-img {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      border-bottom: 2px solid black;
+      background-color: #e0e0e0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    .car-card:hover .card-img img {
+      transform: scale(1.05);
+    }
+
+    /* placeholder when no image */
+    .card-img svg {
+      width: 80px;
+      height: 80px;
+      opacity: 0.3;
+    }
+
+    /* card body */
+    .card-body {
+      padding: 20px;
+    }
+
+    .card-tag {
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background-color: black;
+      color: white;
+      display: inline-block;
+      padding: 3px 8px;
+      margin-bottom: 10px;
+    }
+
+    .card-body h2 {
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0 0 8px 0;
+    }
+
+    .card-body p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+      margin: 0 0 16px 0;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 2px solid black;
+      padding-top: 14px;
+      margin-top: 4px;
+    }
+
+    .card-price {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .card-cta {
+      display: inline-block;
+      background-color: #ffff00;
+      color: black;
+      padding: 8px 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 13px;
+      border: 2px solid black;
+    }
+
+    .card-cta:hover {
+      background-color: black;
+      color: #ffff00;
+    }
+
+    /* ── Footer ── */
+    footer {
+      height: 50px;
+      border: 2px solid black;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .social-links {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .social-links img {
+      width: 28px;
+      height: 28px;
+      object-fit: contain;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <div class="nav-arrows">
+        <button onclick="history.back()">&#8592;</button>
+        <button onclick="history.forward()">&#8594;</button>
+      </div>
+      <div class="header-title">Drive Space</div>
+    </div>
+    <div class="logo">
+      <img src="logo.jpg" alt="Drive Space Logo">
+    </div>
+  </header>
+
+  <!-- Nav -->
+  <nav>
+    <a href="Index-v1.html">Home</a>
+    <a href="carpage.html" class="active">Cars</a>
+    <a href="contact.html">Contact</a>
+    <a href="config-page.html">Car Configuration</a>
+    <a href="comparison.html">Car Comparison</a>
+  </nav>
+
+  <!-- Page heading -->
+  <div class="page-heading">
+    <h1>Our Cars</h1>
+    <p>Find your perfect drive — book a test drive today.</p>
+  </div>
+
+  <!-- Cars grid -->
+  <section class="cars-section">
+    <div class="cars-grid">
+
+      <!-- Card 1 -->
+      <div class="car-card">
+        <div class="card-img">
+           <img src="ds-aero-sport-.jpg" alt="DS Aero One">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Electric · Saloon</span>
+          <h2>DS Aero One</h2>
+          <p>Sleek, silent and efficient. Zero emissions with a 340-mile range and adaptive cruise control.</p>
+          <div class="card-footer">
+            <span class="card-price">From £32,995</span>
+            <a href="booking-page-Ds.html" class="card-cta">Book Test Drive</a>
+          
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="car-card">
+        <div class="card-img">
+          <img src="Terra.jpg" alt="Terra X5">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">SUV · Hybrid</span>
+          <h2>Terra X5</h2>
+          <p>Built for families who refuse to compromise on style or space. Hybrid efficiency meets SUV comfort.</p>
+          <div class="card-footer">
+            <span class="card-price">From £41,500</span>
+            <a href="booking-page-Ds.html" class="card-cta">Book Test Drive</a>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="car-card">
+        <div class="card-img">
+          <img src="VeloxRS.jpg" alt="Velox RS">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Sport · Petrol</span>
+          <h2>Velox RS</h2>
+          <p>0–60 in 3.8 seconds. Track-tuned suspension and an adaptive exhaust for pure driving pleasure.</p>
+          <div class="card-footer">
+            <span class="card-price">From £58,200</span>
+            <a href="booking-page-Ds.html" class="card-cta">Book Test Drive</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 4 -->
+      <div class="car-card">
+        <div class="card-img">
+          <img src="LumaEv.jpg" alt="Luma EV+">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Electric · SUV</span>
+          <h2>Luma EV+</h2>
+          <p>400-mile range, panoramic roof and rapid charge capability. Bold, bright and fully electric.</p>
+          <div class="card-footer">
+            <span class="card-price">From £46,995</span>
+            <a href="booking-page-Ds.html" class="card-cta">Book Test Drive</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 5 -->
+      <div class="car-card">
+        <div class="card-img">
+         <img src="CrestS.jpg" alt="Crest S">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Saloon · Hybrid</span>
+          <h2>Crest S</h2>
+          <p>Business-class comfort for everyday use. Heated leather seats and a whisper-quiet cabin.</p>
+          <div class="card-footer">
+            <span class="card-price">From £36,750</span>
+            <a href="booking-page-Ds.html" class="card-cta">Book Test Drive</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="car-card">
+        <div class="card-img">
+          <img src="ApexGT.jpg" alt="Apex GT">
+        </div>
+        <div class="card-body">
+          <span class="card-tag">Sport · Electric</span>
+          <h2>Apex GT</h2>
+          <p>600 hp, dual-motor AWD and a carbon-fibre interior. The pinnacle of the Drive Space lineup.</p>
+          <div class="card-footer">
+            <span class="card-price">From £79,900</span>
+            <a href="booking-page-Ds.html" class="card-cta">Book Test Drive</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>Copyright © Drive Space 2026</span>
+    <div class="social-links">
+      <a href="#"><img src="Instalogo.jpg" alt="Instagram"></a>
+      <a href="#"><img src="Xlogo.png" alt="X"></a>
+      <a href="#"><img src="Facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="TikTok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+</body>
+</html>

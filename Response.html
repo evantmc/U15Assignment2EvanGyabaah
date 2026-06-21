@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drive Space — Booking Confirmed</title>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+      color: black;
+    }
+
+    /* ── Header ── */
+    header {
+      display: grid;
+      grid-template-columns: 1fr 200px;
+      height: 70px;
+      border: 2px solid black;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      padding-left: 16px;
+      position: relative;
+    }
+
+    .nav-arrows { display: flex; gap: 6px; z-index: 1; }
+
+    .nav-arrows button {
+      width: 32px;
+      height: 32px;
+      background-color: white;
+      border: 2px solid black;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .nav-arrows button:hover { background-color: #ffff00; }
+
+    .header-title {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 42px;
+      font-weight: bold;
+    }
+
+    .logo {
+      background-color: #8c8c8c;
+      border-left: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Nav ── */
+    nav {
+      height: 70px;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 40px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #f5f5f5;
+    }
+
+    nav a {
+      color: black;
+      text-decoration: none;
+      padding: 6px 16px;
+      border: 2px solid transparent;
+    }
+
+    nav a:hover { color: black; background-color: #ffff00; border: 2px solid black; }
+
+    /* ── Response section ── */
+    .response-section {
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      border-bottom: 2px solid black;
+      padding: 80px 40px;
+      text-align: center;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tick {
+      width: 80px;
+      height: 80px;
+      background-color: #ffff00;
+      border: 2px solid black;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 30px auto;
+    }
+
+    .tick svg {
+      width: 40px;
+      height: 40px;
+    }
+
+    .response-section h1 {
+      font-size: 32px;
+      font-weight: bold;
+      margin: 0 0 16px 0;
+    }
+
+    .response-section p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.7;
+      max-width: 500px;
+      margin: 0 0 10px 0;
+    }
+
+    .response-section p strong {
+      color: black;
+    }
+
+    .divider {
+      width: 60px;
+      height: 2px;
+      background-color: black;
+      margin: 24px auto;
+    }
+
+    .what-next {
+      border: 2px solid black;
+      padding: 24px 32px;
+      margin: 30px 0;
+      background-color: #f5f5f5;
+      text-align: left;
+      max-width: 500px;
+      width: 100%;
+    }
+
+    .what-next h2 {
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0 0 14px 0;
+    }
+
+    .what-next ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    .what-next ul li {
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #333;
+      line-height: 1.5;
+    }
+
+    .actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background-color: #ffff00;
+      color: black;
+      padding: 12px 32px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      border: 2px solid black;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-primary:hover { background-color: black; color: #ffff00; }
+
+    .btn-secondary {
+      display: inline-block;
+      background-color: white;
+      color: black;
+      padding: 12px 32px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      border: 2px solid black;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-secondary:hover { background-color: #f5f5f5; }
+
+    /* ── Footer ── */
+    footer {
+      height: 50px;
+      border: 2px solid black;
+      background-color: #f5f5f5;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px;
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .social-links { display: flex; align-items: center; gap: 14px; }
+    .social-links img { width: 28px; height: 28px; object-fit: contain; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <div class="nav-arrows">
+        <button onclick="history.back()">&#8592;</button>
+        <button onclick="history.forward()">&#8594;</button>
+      </div>
+      <div class="header-title">Drive Space</div>
+    </div>
+    <a href="Index-v1.html" class="logo">
+      <img src="logo.jpg" alt="Drive Space Logo">
+    </a>
+  </header>
+
+  <!-- Nav -->
+  <nav>
+    <a href="Index-v1.html">Home</a>
+    <a href="carpage.html">Cars</a>
+    <a href="contact.html">Contact</a>
+    <a href="config-page.html">Car Configuration</a>
+    <a href="comparison.html">Car Comparison</a>
+  </nav>
+
+  <!-- Response -->
+  <section class="response-section">
+
+    <!-- Tick icon -->
+    <div class="tick">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M5 13l4 4L19 7" stroke="black" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+    <h1>Booking Confirmed!</h1>
+    <p>Thank you, <strong id="customerName"></strong>. Your test drive request has been received.</p>
+    <p>A member of the Drive Space team will be in touch shortly to confirm your appointment.</p>
+
+    <div class="divider"></div>
+
+    <!-- What happens next -->
+    <div class="what-next">
+      <h2>What happens next?</h2>
+      <ul>
+        <li>You will receive a confirmation call within 24 hours.</li>
+        <li>We will arrange a date and time that suits you.</li>
+        <li>Your test drive will take place at our showroom or at your home.</li>
+        <li>Bring your driving licence on the day.</li>
+      </ul>
+    </div>
+
+    <!-- Buttons -->
+    <div class="actions">
+      <a href="Index-v1.html" class="btn-primary">Back to Home</a>
+      <a href="carpage.html" class="btn-secondary">Browse More Cars</a>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <span>Copyright © Drive Space 2026</span>
+    <div class="social-links">
+      <a href="#"><img src="Instalogo.jpg" alt="Instagram"></a>
+      <a href="#"><img src="Xlogo.png" alt="X"></a>
+      <a href="#"><img src="Facebook.png" alt="Facebook"></a>
+      <a href="#"><img src="TikTok.png" alt="TikTok"></a>
+    </div>
+  </footer>
+
+  <script>
+    // Get the name from the URL and display it
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name');
+    if (name) {
+      document.getElementById('customerName').textContent = name;
+    }
+  </script>
+
+</body>
+</html>
