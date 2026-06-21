@@ -335,5 +335,37 @@
   Copyright © Drive Space 2026
 </footer>
 
+  
+<script>
+  function validateContactForm() {
+    let valid = true;
+
+    const fields = ['fullname', 'email', 'phone', 'message'];
+
+    fields.forEach(id => {
+      const field = document.getElementById(id);
+      const error = document.getElementById(id + 'Error');
+      const value = field.value.trim();
+
+      if (value === '') {
+        field.classList.add('invalid');
+        error.textContent = 'Please fill out this field';
+        error.style.display = 'block';
+        valid = false;
+      } else {
+        field.classList.remove('invalid');
+        error.style.display = 'none';
+      }
+    });
+
+    if (valid) {
+      const name = document.getElementById('fullname').value.trim();
+      window.location.href = 'Response.html?name=' + encodeURIComponent(name);
+    }
+  }
+</script>
+
+</body>
+</html>
 </body>
 </html>
